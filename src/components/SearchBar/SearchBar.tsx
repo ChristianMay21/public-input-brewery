@@ -132,7 +132,7 @@ export default function SearchBar({
           onBlur={handleLocationBlur}
           onChange={handleLocationChange}
           onKeyDown={handleLocationKeyDown}
-          placeholder="City or ZIP"
+          placeholder="City"
           role="combobox"
           type="text"
           value={locationText}
