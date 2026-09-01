@@ -109,7 +109,7 @@ export default function SearchBar({
             onQueryChange(event.target.value)
           }}
           onKeyDown={handleQueryKeyDown}
-          placeholder="Brewery, beer style, or name"
+          placeholder="Brewery name"
           type="search"
           value={query}
         />
