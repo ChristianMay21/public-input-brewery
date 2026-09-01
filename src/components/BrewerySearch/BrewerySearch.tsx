@@ -165,7 +165,12 @@ export default function BrewerySearch() {
 
   const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
   const safePage = Math.min(page, pageCount - 1)
-  const pageResults = filtered.slice(safePage * PAGE_SIZE, safePage * PAGE_SIZE + PAGE_SIZE)
+  const pageResults = useMemo(
+    function paginateResults() {
+      return filtered.slice(safePage * PAGE_SIZE, safePage * PAGE_SIZE + PAGE_SIZE)
+    },
+    [filtered, safePage],
+  )
 
   const isDirty =
     query !== '' || distance !== DEFAULT_DISTANCE || seats.length > 0 || types.length > 0
@@ -239,21 +244,30 @@ export default function BrewerySearch() {
 
   // Clicking a pin brings its row into view. The list container is scrolled
   // directly rather than through scrollIntoView, which would move the page.
-  const handleSelectPin = useCallback(function selectPin(id: string) {
-    setView('list')
-    setHighlightedId(id)
-
-    window.setTimeout(function scrollRow() {
-      const row = rowRefs.current.get(id)
-      const container = listRef.current
-      if (!row || !container) return
-
-      container.scrollTo({
-        behavior: 'smooth',
-        top: Math.max(0, row.offsetTop - container.offsetTop - 8),
+  const handleSelectPin = useCallback(
+    function selectPin(id: string) {
+      const resultIndex = filtered.findIndex(function isSelected(brewery) {
+        return brewery.id === id
       })
-    }, 40)
-  }, [])
+
+      if (resultIndex >= 0) setPage(Math.floor(resultIndex / PAGE_SIZE))
+
+      setView('list')
+      setHighlightedId(id)
+
+      window.setTimeout(function scrollRow() {
+        const row = rowRefs.current.get(id)
+        const container = listRef.current
+        if (!row || !container) return
+
+        container.scrollTo({
+          behavior: 'smooth',
+          top: Math.max(0, row.offsetTop - container.offsetTop - 8),
+        })
+      }, 40)
+    },
+    [filtered],
+  )
 
   function handleOpenReservation(brewery: Brewery) {
     const existing = reservations[brewery.id]
@@ -373,7 +387,7 @@ export default function BrewerySearch() {
 
           <div className={styles.mapPane}>
             <BreweryMap
-              breweries={pageResults}
+              breweries={filtered}
               distances={distances}
               highlightedId={highlightedId}
               isHidden={view === 'list'}

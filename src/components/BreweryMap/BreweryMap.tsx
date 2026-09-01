@@ -2,7 +2,7 @@
 
 import 'leaflet/dist/leaflet.css'
 import type { Map as LeafletMap, Marker } from 'leaflet'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { seatLabelFor } from '@/lib/availability'
 import type { Brewery } from '@/lib/breweries'
 import { BREWERY_TYPES } from '@/lib/breweryTypes'
@@ -60,10 +60,22 @@ export default function BreweryMap({
   const containerRef = useRef<HTMLDivElement>(null)
   const mapRef = useRef<LeafletMap | null>(null)
   const markersRef = useRef(new Map<string, Marker>())
+  const fittedResultsKey = useRef<string | null>(null)
 
   // Leaflet is imported asynchronously, so the effects that draw into the map
   // need to know when it actually exists rather than racing its creation.
   const [isReady, setIsReady] = useState(false)
+
+  const resultsKey = useMemo(
+    function identifyResults() {
+      return `${origin.city},${origin.state}:${breweries
+        .map(function toId(brewery) {
+          return brewery.id
+        })
+        .join('|')}`
+    },
+    [breweries, origin],
+  )
 
   // Leaflet reads `window` on import, so it is only pulled in on the client.
   useEffect(function createMap() {
@@ -135,17 +147,21 @@ export default function BreweryMap({
           markersRef.current.set(brewery.id, marker)
         })
 
-        if (breweries.length > 1) {
-          map.fitBounds(
-            breweries.map(function toLatLng(brewery) {
-              return [brewery.lat, brewery.lng] as [number, number]
-            }),
-            { padding: [46, 46], maxZoom: 14 },
-          )
-        } else if (breweries.length === 1) {
-          map.setView([breweries[0].lat, breweries[0].lng], 14)
-        } else {
-          map.setView([origin.lat, origin.lng], 13)
+        if (fittedResultsKey.current !== resultsKey) {
+          fittedResultsKey.current = resultsKey
+
+          if (breweries.length > 1) {
+            map.fitBounds(
+              breweries.map(function toLatLng(brewery) {
+                return [brewery.lat, brewery.lng] as [number, number]
+              }),
+              { padding: [46, 46], maxZoom: 14 },
+            )
+          } else if (breweries.length === 1) {
+            map.setView([breweries[0].lat, breweries[0].lng], 14)
+          } else {
+            map.setView([origin.lat, origin.lng], 13)
+          }
         }
       })
 
@@ -153,7 +169,7 @@ export default function BreweryMap({
         cancelled = true
       }
     },
-    [breweries, distances, isReady, onHover, onSelect, origin],
+    [breweries, distances, isReady, onHover, onSelect, origin, resultsKey],
   )
 
   useEffect(
@@ -173,7 +189,6 @@ export default function BreweryMap({
       if (!marker) return
 
       marker.openTooltip()
-      map.panTo(marker.getLatLng(), { animate: true, duration: 0.3 })
     },
     [highlightedId, isReady],
   )

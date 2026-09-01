@@ -7,13 +7,19 @@
   $shadow-color: null,
   $shadow-strength: null
 ) {
-  $--shadow-color: $shadow-color or if($theme == dark, 220 40% 2%, 220 3% 15%);
-  $--shadow-strength: $shadow-strength or if($theme == dark, 25%, 1%);
-  $--inner-shadow-highlight: if(
-    $theme == dark,
-    (inset 0 -0.5px 0 0 #fff1, inset 0 0.5px 0 0 #0007),
-    (inset 0 -0.5px 0 0 #fff, inset 0 0.5px 0 0 #0001)
-  );
+  $--shadow-color: $shadow-color;
+  $--shadow-strength: $shadow-strength;
+  $--inner-shadow-highlight: null;
+
+  @if $theme == dark {
+    $--shadow-color: $--shadow-color or 220 40% 2%;
+    $--shadow-strength: $--shadow-strength or 25%;
+    $--inner-shadow-highlight: (inset 0 -0.5px 0 0 #fff1, inset 0 0.5px 0 0 #0007);
+  } @else {
+    $--shadow-color: $--shadow-color or 220 3% 15%;
+    $--shadow-strength: $--shadow-strength or 1%;
+    $--inner-shadow-highlight: (inset 0 -0.5px 0 0 #fff, inset 0 0.5px 0 0 #0001);
+  }
   $shadows-map: (
     1: (
       0 1px 2px -1px Hsl($--shadow-color / calc($--shadow-strength + 9%)),
