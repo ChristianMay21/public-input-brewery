@@ -54,12 +54,18 @@ export default function SearchBar({
   function handleLocationKeyDown(event: KeyboardEvent<HTMLInputElement>) {
     if (suggestions.length === 0) return
 
+    // Updated from the previous value rather than the rendered one, so held
+    // or repeated arrow keys within a single frame each move one step.
     if (event.key === 'ArrowDown') {
       event.preventDefault()
-      setActiveIndex((activeIndex + 1) % suggestions.length)
+      setActiveIndex(function next(current) {
+        return (current + 1) % suggestions.length
+      })
     } else if (event.key === 'ArrowUp') {
       event.preventDefault()
-      setActiveIndex((activeIndex - 1 + suggestions.length) % suggestions.length)
+      setActiveIndex(function previous(current) {
+        return (current - 1 + suggestions.length) % suggestions.length
+      })
     } else if (event.key === 'Enter') {
       event.preventDefault()
       commitCity(suggestions[activeIndex])

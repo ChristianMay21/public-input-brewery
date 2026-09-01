@@ -8,20 +8,24 @@
   background: rgb(18 18 16 / 44%);
 }
 
+// Centred by auto margins rather than a translate, because the entry
+// animation resolves `transform` to `none` and would cancel it.
 .card {
   position: fixed;
-  top: 50%;
-  left: 50%;
+  inset: 0;
   z-index: 91;
+  overflow-y: auto;
   width: calc(100% - 40px);
   max-width: 420px;
+  height: fit-content;
+  max-height: calc(100% - 40px);
+  margin: auto;
   padding: 24px;
   border-radius: 18px;
   background: #fff;
   color: op.$stone-11;
   font-family: op.$font-geometric-humanist;
   box-shadow: 0 30px 70px -30px rgb(18 18 16 / 70%);
-  transform: translate(-50%, -50%);
   @include motion.pop-in(0.18s);
 }
 
