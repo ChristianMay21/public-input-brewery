@@ -1,0 +1,44 @@
+@use '../../app/styles/open-props/index.scss' as op;
+@use '../../app/styles/motion.scss' as motion;
+
+// Borrows the filter panels' surface so the dropdown reads as part of the
+// same system rather than as a new one.
+.suggestions {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  left: 0;
+  z-index: 40;
+  overflow: hidden;
+  margin: 0;
+  padding: 6px;
+  border: 1px solid op.$stone-3;
+  border-radius: op.$radius-3;
+  background: #fff;
+  list-style: none;
+  box-shadow: 0 14px 30px -18px rgb(18 18 16 / 50%);
+  @include motion.pop-in;
+}
+
+.suggestion {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &[data-active='true'] {
+    background: op.$stone-1;
+  }
+}
+
+.city {
+  font-size: 14px;
+  font-weight: op.$font-weight-6;
+}
+
+.state {
+  color: op.$stone-7;
+  font-size: 12.5px;
+}

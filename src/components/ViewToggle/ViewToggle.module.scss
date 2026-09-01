@@ -1,0 +1,31 @@
+@use '../../app/styles/open-props/index.scss' as op;
+
+.toggle {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: op.$radius-round;
+  background: op.$stone-2;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border: 0;
+  border-radius: op.$radius-round;
+  background: transparent;
+  color: op.$stone-7;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: op.$font-weight-6;
+  line-height: 1;
+  cursor: pointer;
+
+  &[data-selected='true'] {
+    background: #fff;
+    color: op.$stone-11;
+    box-shadow: 0 1px 3px rgb(18 18 16 / 16%);
+  }
+}

@@ -1,0 +1,91 @@
+@use '../../app/styles/open-props/index.scss' as op;
+
+// The search is the whole page, so the page-level surface and typography live
+// here rather than in the global stylesheet.
+.page {
+  min-height: 100vh;
+  padding-bottom: 80px;
+  background: op.$stone-0;
+  color: op.$stone-11;
+  font-family: op.$font-geometric-humanist;
+  font-weight: op.$font-weight-4;
+  -webkit-font-smoothing: antialiased;
+}
+
+.content {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 56px 32px 0;
+
+  @media #{op.$md-n-below} {
+    padding: 28px 20px 0;
+  }
+}
+
+.title {
+  margin: 0 0 6px;
+  font-size: 34px;
+  font-weight: op.$font-weight-6;
+  letter-spacing: -0.028em;
+  line-height: 1.1;
+
+  @media #{op.$md-n-below} {
+    font-size: 25px;
+  }
+}
+
+.subtitle {
+  margin: 0 0 22px;
+  color: op.$stone-7;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+
+  @media #{op.$md-n-below} {
+    grid-template-columns: 1fr;
+  }
+}
+
+.listPane {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+
+  // Below the breakpoint the list and the map share one column, and the
+  // segmented toggle in the results header decides which one is shown.
+  @media #{op.$md-n-below} {
+    .page[data-view='map'] & {
+      display: none;
+    }
+  }
+}
+
+.mapPane {
+  position: sticky;
+  // Leaflet gives its own panes and controls z-indexes up to 1000. Without a
+  // stacking context here those compete at the root and paint over the
+  // waitlist dialog, so the map is confined to its own layer.
+  z-index: 0;
+  top: 24px;
+  overflow: hidden;
+  height: calc(100vh - 150px);
+  border: 1px solid op.$stone-3;
+  border-radius: op.$radius-3;
+  background: op.$stone-2;
+
+  @media #{op.$md-n-below} {
+    position: relative;
+    top: auto;
+    height: 560px;
+
+    .page[data-view='list'] & {
+      display: none;
+    }
+  }
+}

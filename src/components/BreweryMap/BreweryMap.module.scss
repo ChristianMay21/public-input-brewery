@@ -1,0 +1,134 @@
+@use '../../app/styles/open-props/index.scss' as op;
+
+.map {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: op.$stone-2;
+
+  // Leaflet owns the markup inside the map, so its own class names are
+  // targeted here rather than in a global stylesheet.
+  :global(.leaflet-container) {
+    font-family: op.$font-geometric-humanist;
+    background: op.$stone-2;
+  }
+
+  :global(.leaflet-control-attribution) {
+    background: rgb(255 255 255 / 78%);
+    font-size: 10px;
+  }
+}
+
+.pin {
+  display: grid;
+  place-items: center;
+
+  &[data-seats='high'] {
+    --pin-fill: #{op.$jungle-9};
+  }
+
+  &[data-seats='medium'] {
+    --pin-fill: #{op.$yellow-6};
+  }
+
+  &[data-seats='low'] {
+    --pin-fill: #{op.$red-7};
+  }
+
+  &[data-active='true'] .pinDot {
+    transform: scale(1.6);
+  }
+}
+
+.pinDot {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: var(--pin-fill);
+  box-shadow: 0 2px 6px rgb(18 18 16 / 35%);
+  transition: transform 0.14s ease;
+}
+
+.tooltip {
+  padding: 0;
+  border: 1px solid op.$stone-3;
+  border-radius: 12px;
+  background: #fff;
+  color: op.$stone-11;
+  box-shadow: 0 8px 24px rgb(18 18 16 / 14%);
+
+  :global(.leaflet-tooltip-content) {
+    margin: 0;
+  }
+
+  &:global(.leaflet-tooltip-top)::before {
+    border-top-color: #fff;
+  }
+}
+
+.tooltipBody {
+  display: block;
+  min-width: 186px;
+  padding: 10px 12px;
+}
+
+.tooltipName {
+  display: block;
+  font-size: 13px;
+  font-weight: op.$font-weight-7;
+  letter-spacing: -0.01em;
+}
+
+.tooltipMeta {
+  display: block;
+  margin-top: 2px;
+  color: op.$stone-7;
+  font-size: 11px;
+}
+
+.tooltipTags {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.tooltipType {
+  padding: 3px 6px;
+  border-radius: 4px;
+  background: op.$stone-1;
+  color: op.$stone-9;
+  font-size: 10px;
+  font-weight: op.$font-weight-7;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.tooltipSeats {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: op.$stone-9;
+  font-size: 11px;
+
+  &[data-seats='high'] {
+    --tooltip-dot: #{op.$jungle-9};
+  }
+
+  &[data-seats='medium'] {
+    --tooltip-dot: #{op.$yellow-6};
+  }
+
+  &[data-seats='low'] {
+    --tooltip-dot: #{op.$red-7};
+  }
+}
+
+.tooltipDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--tooltip-dot);
+}

@@ -1,0 +1,46 @@
+@use '../../app/styles/open-props/index.scss' as op;
+@use '../../app/styles/motion.scss' as motion;
+
+.panel {
+  margin-top: 10px;
+  padding: 20px 22px 18px;
+  border: 1px solid op.$stone-3;
+  border-radius: op.$radius-3;
+  background: #fff;
+  @include motion.pop-in;
+}
+
+.heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.label {
+  color: op.$stone-9;
+  font-size: 13px;
+  font-weight: op.$font-weight-6;
+  letter-spacing: 0.02em;
+}
+
+.value {
+  font-size: 20px;
+  font-weight: op.$font-weight-6;
+  letter-spacing: -0.02em;
+}
+
+.slider {
+  display: block;
+  width: 100%;
+  accent-color: op.$stone-11;
+}
+
+.ticks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  color: op.$stone-6;
+  font-size: 11px;
+  letter-spacing: 0.03em;
+}

@@ -1,0 +1,93 @@
+@use '../../app/styles/open-props/index.scss' as op;
+@use '../../app/styles/motion.scss' as motion;
+
+.panel {
+  margin-top: 10px;
+  padding: 20px 22px;
+  border: 1px solid op.$stone-3;
+  border-radius: op.$radius-3;
+  background: #fff;
+  @include motion.pop-in;
+}
+
+.legend {
+  margin: 0 0 14px;
+  color: op.$stone-9;
+  font-size: 13px;
+  font-weight: op.$font-weight-6;
+  letter-spacing: 0.02em;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
+  gap: 8px;
+}
+
+.option {
+  position: relative;
+}
+
+.tile {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 12px 13px;
+  border: 1px solid op.$stone-3;
+  border-radius: 12px;
+  background: #fff;
+  color: op.$stone-11;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: op.$font-weight-6;
+  line-height: 1;
+  text-align: left;
+  cursor: pointer;
+
+  &[data-selected='true'] {
+    border-color: op.$stone-11;
+    background: op.$stone-2;
+  }
+
+  &[data-empty='true'] {
+    color: op.$stone-6;
+    cursor: not-allowed;
+  }
+
+  &:hover,
+  &:focus-visible {
+    border-color: op.$stone-11;
+  }
+}
+
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  z-index: 30;
+  width: 236px;
+  max-width: 74vw;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: op.$stone-11;
+  color: op.$stone-1;
+  font-size: 12px;
+  line-height: 1.45;
+  box-shadow: 0 10px 26px -12px rgb(18 18 16 / 60%);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+
+  .tile:hover + &,
+  .tile:focus-visible + & {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.tooltipTitle {
+  display: block;
+  margin-bottom: 3px;
+  font-weight: op.$font-weight-7;
+}

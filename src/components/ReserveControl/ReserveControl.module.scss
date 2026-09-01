@@ -1,0 +1,78 @@
+@use '../../app/styles/open-props/index.scss' as op;
+@use '../../app/styles/motion.scss' as motion;
+
+.control {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 17px;
+  border: 1px solid op.$stone-3;
+  border-radius: op.$radius-round;
+  background: #fff;
+  color: op.$stone-9;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: op.$font-weight-6;
+  line-height: 1;
+  white-space: nowrap;
+
+  &[data-state='idle'] {
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      border-color: op.$stone-11;
+      background: op.$stone-1;
+    }
+  }
+
+  &[data-state='reserving'] {
+    gap: 8px;
+    color: op.$stone-6;
+  }
+
+  &[data-state='reserved'],
+  &[data-state='ready'] {
+    border-color: op.$jungle-1;
+    background: op.$jungle-0;
+    color: op.$jungle-10;
+    font-weight: op.$font-weight-7;
+  }
+
+  &[data-state='ready'] {
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      border-color: op.$jungle-10;
+    }
+  }
+
+  // Reuses the design's "selected" treatment from the filter chips, so an
+  // active waitlist reads the same way an active filter does.
+  &[data-state='in-line'] {
+    border-color: op.$stone-11;
+    background: op.$stone-2;
+    color: op.$stone-11;
+    font-weight: op.$font-weight-7;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      background: op.$stone-3;
+    }
+  }
+}
+
+.spinner {
+  width: 13px;
+  height: 13px;
+  border: 2px solid op.$stone-2;
+  border-top-color: op.$stone-6;
+  border-radius: 50%;
+  @include motion.spin;
+
+  @media #{op.$motionNotOK} {
+    animation-duration: 2.5s;
+  }
+}

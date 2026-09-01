@@ -1,0 +1,177 @@
+@use '../../app/styles/open-props/index.scss' as op;
+@use '../../app/styles/motion.scss' as motion;
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgb(18 18 16 / 44%);
+}
+
+.card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 91;
+  width: calc(100% - 40px);
+  max-width: 420px;
+  padding: 24px;
+  border-radius: 18px;
+  background: #fff;
+  color: op.$stone-11;
+  font-family: op.$font-geometric-humanist;
+  box-shadow: 0 30px 70px -30px rgb(18 18 16 / 70%);
+  transform: translate(-50%, -50%);
+  @include motion.pop-in(0.18s);
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.heading {
+  min-width: 0;
+}
+
+.kicker {
+  margin: 0 0 5px;
+  color: op.$stone-9;
+  font-size: 12px;
+  font-weight: op.$font-weight-7;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.name {
+  margin: 0;
+  font-size: 19px;
+  font-weight: op.$font-weight-6;
+  letter-spacing: -0.02em;
+}
+
+.close {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: op.$radius-round;
+  background: op.$stone-1;
+  color: op.$stone-9;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    background: op.$stone-2;
+  }
+}
+
+.body {
+  padding-top: 18px;
+  border-top: 1px solid op.$stone-2;
+}
+
+.copy {
+  margin: 0 0 20px;
+  color: op.$stone-9;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.primary {
+  width: 100%;
+  padding: 16px;
+  border: 0;
+  border-radius: op.$radius-round;
+  background: op.$stone-11;
+  color: #fff;
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: op.$font-weight-6;
+  line-height: 1;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    background: op.$stone-12;
+  }
+}
+
+.secondary {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid op.$stone-3;
+  border-radius: op.$radius-round;
+  background: #fff;
+  color: op.$stone-9;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: op.$font-weight-6;
+  line-height: 1;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    border-color: op.$stone-11;
+    background: op.$stone-1;
+  }
+}
+
+.position {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0 0 8px;
+}
+
+.positionNumber {
+  color: op.$stone-11;
+  font-size: 56px;
+  font-weight: op.$font-weight-6;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+}
+
+.positionLabel {
+  color: op.$stone-9;
+  font-size: 14px;
+}
+
+.progress {
+  overflow: hidden;
+  height: 6px;
+  margin-bottom: 22px;
+  border-radius: op.$radius-round;
+  background: op.$stone-2;
+}
+
+.progressFill {
+  display: block;
+  height: 100%;
+  border-radius: op.$radius-round;
+  background: op.$stone-11;
+  transition: width 0.5s ease;
+}
+
+.readyMark {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: 16px;
+  border-radius: op.$radius-round;
+  background: op.$jungle-0;
+  color: op.$jungle-10;
+}
+
+.readyHeading {
+  margin: 0 0 6px;
+  font-size: 19px;
+  font-weight: op.$font-weight-6;
+  letter-spacing: -0.02em;
+}

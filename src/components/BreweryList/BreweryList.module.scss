@@ -1,0 +1,131 @@
+@use '../../app/styles/open-props/index.scss' as op;
+
+// Rows bleed 14px past the text column so their hover fill reads as a full
+// band. The container carries the matching padding and negative margin, which
+// keeps that bleed inside its scroll box instead of overflowing sideways.
+.list {
+  overflow-y: auto;
+  max-height: calc(100vh - 150px);
+  margin: 0 -14px;
+  padding: 0 14px;
+
+  @media #{op.$md-n-below} {
+    overflow-y: visible;
+    max-height: none;
+  }
+}
+
+.loadingLabel {
+  margin: 0 0 14px;
+  color: op.$stone-7;
+  font-size: 13.5px;
+}
+
+.skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 18px 0;
+  border-bottom: 1px solid op.$stone-2;
+}
+
+.skeletonBadge {
+  width: 78px;
+  height: 20px;
+  border-radius: 6px;
+  background: op.$stone-2;
+}
+
+.skeletonName {
+  width: min(62%, 240px);
+  height: 18px;
+  border-radius: 6px;
+  background: op.$stone-2;
+}
+
+.skeletonLine {
+  width: min(84%, 320px);
+  height: 13px;
+  border-radius: 6px;
+  background: op.$stone-1;
+}
+
+.notice {
+  padding: 56px 20px;
+  text-align: center;
+}
+
+.noticeTitle {
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: op.$font-weight-6;
+}
+
+.noticeBody {
+  margin: 0;
+  color: op.$stone-7;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.retry {
+  margin-top: 18px;
+  padding: 11px 17px;
+  border: 1px solid op.$stone-3;
+  border-radius: op.$radius-round;
+  background: #fff;
+  color: op.$stone-9;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: op.$font-weight-6;
+  line-height: 1;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    border-color: op.$stone-11;
+    background: op.$stone-1;
+  }
+}
+
+.rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 22px 0 4px;
+}
+
+.pageLabel {
+  color: op.$stone-6;
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+}
+
+.next {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 13px 20px;
+  border: 1px solid op.$stone-3;
+  border-radius: op.$radius-round;
+  background: #fff;
+  color: op.$stone-11;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: op.$font-weight-6;
+  line-height: 1;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    border-color: op.$stone-11;
+    color: op.$stone-9;
+  }
+}

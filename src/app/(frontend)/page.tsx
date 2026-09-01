@@ -1,12 +1,6 @@
 import React from 'react'
+import BrewerySearch from '@/components/BrewerySearch/BrewerySearch'
 
-import './styles.scss'
-import Main from '../components/Main'
-
-export default async function HomePage() {
-  return (
-    <div>
-      <Main />
-    </div>
-  )
+export default function HomePage() {
+  return <BrewerySearch />
 }

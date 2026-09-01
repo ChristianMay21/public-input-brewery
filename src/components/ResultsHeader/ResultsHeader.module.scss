@@ -1,0 +1,41 @@
+@use '../../app/styles/open-props/index.scss' as op;
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 26px 0 6px;
+}
+
+.summary {
+  margin: 0;
+  color: op.$stone-9;
+  font-size: 13.5px;
+}
+
+.count {
+  color: op.$stone-11;
+  font-weight: op.$font-weight-6;
+}
+
+.sort {
+  margin: 0;
+  color: op.$stone-6;
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+
+  @media #{op.$md-n-below} {
+    display: none;
+  }
+}
+
+// The list/map toggle takes the sort label's place on narrow screens, where
+// only one of the two panes can be shown at a time.
+.view {
+  display: none;
+
+  @media #{op.$md-n-below} {
+    display: block;
+  }
+}

@@ -1,0 +1,70 @@
+@use '../../app/styles/open-props/index.scss' as op;
+@use '../../app/styles/motion.scss' as motion;
+
+.panel {
+  margin-top: 10px;
+  padding: 20px 22px;
+  border: 1px solid op.$stone-3;
+  border-radius: op.$radius-3;
+  background: #fff;
+  @include motion.pop-in;
+}
+
+.legend {
+  margin: 0 0 14px;
+  color: op.$stone-9;
+  font-size: 13px;
+  font-weight: op.$font-weight-6;
+  letter-spacing: 0.02em;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 16px;
+  border: 1px solid op.$stone-3;
+  border-radius: 12px;
+  background: #fff;
+  color: op.$stone-11;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: op.$font-weight-6;
+  line-height: 1;
+  cursor: pointer;
+
+  &[data-seats='high'] {
+    --option-dot: #{op.$jungle-9};
+  }
+
+  &[data-seats='medium'] {
+    --option-dot: #{op.$yellow-6};
+  }
+
+  &[data-seats='low'] {
+    --option-dot: #{op.$red-7};
+  }
+
+  &[data-selected='true'] {
+    border-color: op.$stone-11;
+    background: op.$stone-2;
+  }
+
+  &:hover,
+  &:focus-visible {
+    border-color: op.$stone-11;
+  }
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--option-dot);
+}

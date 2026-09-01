@@ -1,0 +1,84 @@
+@use '../../app/styles/open-props/index.scss' as op;
+
+.filters {
+  margin-top: 16px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+
+  // On narrow screens the chips become one horizontally scrolling drawer that
+  // bleeds to the screen edges instead of wrapping onto a second line.
+  @media #{op.$md-n-below} {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin: 0 -20px;
+    padding: 0 20px;
+    scrollbar-width: none;
+
+    > * {
+      flex: 0 0 auto;
+    }
+  }
+}
+
+.heading {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 7px;
+  padding-right: 4px;
+  color: op.$stone-7;
+  font-size: 12px;
+  font-weight: op.$font-weight-6;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 14px;
+  border: 1px solid op.$stone-3;
+  border-radius: op.$radius-round;
+  background: #fff;
+  color: op.$stone-11;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: op.$font-weight-6;
+  line-height: 1;
+  cursor: pointer;
+
+  &[data-active='true'] {
+    border-color: op.$stone-11;
+    background: op.$stone-2;
+  }
+
+  &:hover,
+  &:focus-visible {
+    border-color: op.$stone-11;
+  }
+}
+
+.clear {
+  padding: 9px 6px;
+  border: 0;
+  background: transparent;
+  color: op.$stone-7;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: op.$font-weight-6;
+  line-height: 1;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    color: op.$stone-11;
+  }
+}
