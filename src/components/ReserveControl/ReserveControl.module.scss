@@ -39,6 +39,7 @@
     font-weight: op.$font-weight-7;
   }
 
+  &[data-state='reserved'],
   &[data-state='ready'] {
     cursor: pointer;
 

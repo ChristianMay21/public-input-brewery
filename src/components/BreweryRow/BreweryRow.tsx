@@ -11,6 +11,7 @@ type BreweryRowProps = {
   brewery: Brewery
   distance: number
   isHighlighted: boolean
+  onCancelReservation: (brewery: Brewery) => void
   onHover: (id: string | null) => void
   onOpenReservation: (brewery: Brewery) => void
   reservation: Reservation | undefined
@@ -21,6 +22,7 @@ export default function BreweryRow({
   brewery,
   distance,
   isHighlighted,
+  onCancelReservation,
   onHover,
   onOpenReservation,
   reservation,
@@ -36,6 +38,10 @@ export default function BreweryRow({
 
   function handleOpen() {
     onOpenReservation(brewery)
+  }
+
+  function handleCancel() {
+    onCancelReservation(brewery)
   }
 
   return (
@@ -66,6 +72,7 @@ export default function BreweryRow({
         <ReserveControl
           breweryName={brewery.name}
           isWaitlist={brewery.seats === 'low'}
+          onCancel={handleCancel}
           onOpen={handleOpen}
           reservation={reservation}
         />

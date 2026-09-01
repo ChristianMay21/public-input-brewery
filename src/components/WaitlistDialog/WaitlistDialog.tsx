@@ -91,9 +91,14 @@ export default function WaitlistDialog({
               <Dialog.Description className={styles.copy}>
                 {`Head to the host stand at ${brewery?.name ?? ''} within the next 10 minutes.`}
               </Dialog.Description>
-              <button className={styles.primary} onClick={onClose} type="button">
-                Got it
-              </button>
+              <div className={styles.actions}>
+                <button className={styles.primary} onClick={onClose} type="button">
+                  Got it
+                </button>
+                <button className={styles.secondary} onClick={onLeave} type="button">
+                  Leave the waitlist
+                </button>
+              </div>
             </div>
           ) : null}
         </Dialog.Content>

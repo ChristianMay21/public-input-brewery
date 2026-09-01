@@ -269,6 +269,13 @@ export default function BrewerySearch() {
     [filtered],
   )
 
+  function handleCancelReservation(brewery: Brewery) {
+    const next = { ...reservations }
+    delete next[brewery.id]
+    setReservations(next)
+    if (dialogId === brewery.id) setDialogId(null)
+  }
+
   function handleOpenReservation(brewery: Brewery) {
     const existing = reservations[brewery.id]
 
@@ -374,6 +381,7 @@ export default function BrewerySearch() {
               highlightedId={highlightedId}
               isLoading={isLoading}
               listRef={listRef}
+              onCancelReservation={handleCancelReservation}
               onHover={handleHover}
               onNextPage={handleNextPage}
               onOpenReservation={handleOpenReservation}

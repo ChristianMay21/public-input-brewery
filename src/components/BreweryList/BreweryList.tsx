@@ -17,6 +17,7 @@ type BreweryListProps = {
   highlightedId: string | null
   isLoading: boolean
   listRef: RefObject<HTMLDivElement | null>
+  onCancelReservation: (brewery: Brewery) => void
   onHover: (id: string | null) => void
   onNextPage: () => void
   onOpenReservation: (brewery: Brewery) => void
@@ -35,6 +36,7 @@ export default function BreweryList({
   highlightedId,
   isLoading,
   listRef,
+  onCancelReservation,
   onHover,
   onNextPage,
   onOpenReservation,
@@ -99,6 +101,7 @@ export default function BreweryList({
                 distance={distances.get(brewery.id) ?? 0}
                 isHighlighted={highlightedId === brewery.id}
                 key={brewery.id}
+                onCancelReservation={onCancelReservation}
                 onHover={onHover}
                 onOpenReservation={onOpenReservation}
                 reservation={reservations[brewery.id]}

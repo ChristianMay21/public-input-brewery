@@ -5,6 +5,7 @@ import styles from './ReserveControl.module.scss'
 type ReserveControlProps = {
   breweryName: string
   isWaitlist: boolean
+  onCancel: () => void
   onOpen: () => void
   reservation: Reservation | undefined
 }
@@ -12,6 +13,7 @@ type ReserveControlProps = {
 export default function ReserveControl({
   breweryName,
   isWaitlist,
+  onCancel,
   onOpen,
   reservation,
 }: ReserveControlProps) {
@@ -26,10 +28,16 @@ export default function ReserveControl({
 
   if (reservation?.kind === 'reserved') {
     return (
-      <span className={styles.control} data-state="reserved">
+      <button
+        aria-label={`Cancel reservation at ${breweryName}`}
+        className={styles.control}
+        data-state="reserved"
+        onClick={onCancel}
+        type="button"
+      >
         <Check aria-hidden="true" height={14} width={14} />
-        Reserved
-      </span>
+        Cancel reservation
+      </button>
     )
   }
 
@@ -50,13 +58,13 @@ export default function ReserveControl({
   if (reservation?.kind === 'inLine') {
     return (
       <button
-        aria-label={`You are number ${reservation.position} in line at ${breweryName}. Open waitlist`}
+        aria-label={`Leave waitlist at ${breweryName}. You are number ${reservation.position} in line.`}
         className={styles.control}
         data-state="in-line"
-        onClick={onOpen}
+        onClick={onCancel}
         type="button"
       >
-        {`In line · #${reservation.position}`}
+        {`Leave waitlist · #${reservation.position}`}
       </button>
     )
   }
